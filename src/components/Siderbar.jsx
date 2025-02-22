@@ -1,5 +1,5 @@
 import SidebarButton from './SideBarButton';
-import { HomeIcon, MenuIcon, PlusIcon, UsersIcon } from './icons/Icons'
+import { HomeIcon, MenuIcon, PlusIcon, UsersIcon, QuestionIcon } from './icons/Icons'
 import { motion } from 'framer-motion';
 
 const Sidebar = () => {
@@ -18,6 +18,7 @@ const Sidebar = () => {
                 <SidebarButton icon={<MenuIcon />} active />
                 <SidebarButton icon={<UsersIcon />} />
                 <SidebarButton icon={<PlusIcon />} />
+                <SidebarButton icon={<QuestionIcon />} />
             </div>
             <div className="mt-auto mb-6">
                 <div className="h-10 w-10 bg-gray-300 rounded-full"></div>
