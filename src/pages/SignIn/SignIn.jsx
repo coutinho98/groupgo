@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react"
 import Sidebar from '../../components/Siderbar'
 import Input from '../../components/Input'
 import Checkbox from '../../components/Checkbox'
@@ -8,11 +8,12 @@ import Divider from '../../components/Divider'
 import { GoogleIcon, FacebookIcon, GithubIcon } from '../../components/icons/Icons'
 import { Link } from 'react-router'
 
-const Login = ({ onLogin }) => {
+const SignUp = () => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
-        rememberMe: false
+        confirmPassword: "",
+        agreeTerms: false
     })
 
     const handleChange = (e) => {
@@ -24,10 +25,8 @@ const Login = ({ onLogin }) => {
     }
 
     const handleSubmit = (e) => {
-        //criar rotas para login
         e.preventDefault();
-        console.log("log in :):)", formData)
-        onLogin();
+        console.log("sign in :):)")
     }
 
     return (
@@ -37,8 +36,8 @@ const Login = ({ onLogin }) => {
             <div className="flex-1 flex items-center justify-center">
                 <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
                     <div className="w-full max-w-sm p-6">
-                        <h1 className="text-4xl font-medium text-teal-700 text-center mb-2">Welcome to the GroupGo</h1>
-                        <p className="text-2x1 text-gray-500 text-center mb-5">sign in to your account </p>
+                        <h1 className="text-4xl font-medium text-teal-700 text-center mb-2">Create Account</h1>
+                        <p className="text-2x1 text-gray-500 text-center mb-5">sign up to start using our service </p>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <Input
@@ -61,26 +60,33 @@ const Login = ({ onLogin }) => {
                                 onChange={handleChange}
                                 placeholder='*********'
                                 required
-                                rightElement={
-                                    <a href='#' className='text-xs text-teal-600 hover:underline'>
-                                        forgot password?
-                                    </a>
-                                }
                             ></Input>
 
-                            <Checkbox
-                                id="rememberMe"
-                                name="rememberMe"
-                                checked={formData.rememberMe}
+                            <Input
+                                label="confirm password"
+                                id="confirmPassword"
+                                type="password"
+                                name="confirmPassword"
+                                value={formData.confirmPassword}
                                 onChange={handleChange}
-                                label="remember me" />
+                                placeholder='*********'
+                                required
+                            ></Input>
 
-                            <Button type="submit">sign in</Button>
+
+                            <Checkbox
+                                id="agreeTerms"
+                                name="agreeTerms"
+                                checked={formData.agreeTerms}
+                                onChange={handleChange}
+                                label="i agree to the terms of service and privacy policy" />
+
+                            <Button type="submit">sign up</Button>
                         </form>
                         <p className="mt-4 text-center text-sm text-gray-500">
-                            dont have an account?{" "}
-                            <Link to="/signup" className='text-teal-600 hover:underline'>
-                                sign up
+                            already have an account?{" "}
+                            <Link to="/" className='text-teal-600 hover:underline'>
+                                sign in
                             </Link>
                         </p>
 
@@ -92,11 +98,10 @@ const Login = ({ onLogin }) => {
                             <SocialButton icon={<FacebookIcon />} onClick={() => console.log("facetruck :):):)")}></SocialButton>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div >
+            </div >
+        </div >
     )
 }
 
-
-export default Login;
+export default SignUp;

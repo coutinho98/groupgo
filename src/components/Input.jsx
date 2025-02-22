@@ -14,7 +14,7 @@ const Input = ({
     return (
         <div className="mb-4">
             <div className="flex justify-between items-center mb-1">
-                <label className="block text-sm font-medium text-gray-600" htmlFor={id}>
+                <label className="block text-2x1 font-medium text-gray-600" htmlFor={id}>
                     {label}
                 </label>
                 {rightElement}
