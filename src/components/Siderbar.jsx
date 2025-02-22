@@ -14,10 +14,10 @@ const Sidebar = () => {
                 </div>
             </motion.div>
             <div className="flex flex-col items-center space-y-8 mt-4">
-                <SidebarButton icon={<HomeIcon />} />
+               {/*  <SidebarButton icon={<HomeIcon />} /> */}
                 <SidebarButton icon={<MenuIcon />} active />
-                <SidebarButton icon={<UsersIcon />} />
-                <SidebarButton icon={<PlusIcon />} />
+               {/*  <SidebarButton icon={<UsersIcon />} />
+                <SidebarButton icon={<PlusIcon />} /> */}
             </div>
             <div className="mt-auto mb-6">
                 <div className="h-10 w-10 bg-gray-300 rounded-full"></div>

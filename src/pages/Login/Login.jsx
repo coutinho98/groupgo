@@ -12,11 +12,12 @@ import { useReward } from 'react-rewards';
 
 const Login = ({ onLogin }) => {
     const { reward: balloonsReward, isAnimating: isBalloonsAnimating } = useReward('balloonsReward', 'balloons', {
-        elementCount: 20,
-        elementSize: 30,
+        elementCount: 30,
+        elementSize: 25,
         colors: ['#00bba7', '#ff53ac', '#5733FF', '#b79700'],
         position: 'fixed',
-        fps: 60
+        fps: 60,
+        spread: 70
     });
     const [formData, setFormData] = useState({
         email: "",
