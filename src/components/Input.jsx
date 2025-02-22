@@ -19,9 +19,7 @@ const Input = ({
                 </label>
                 {rightElement}
             </div>
-            <input className={`w-full px-3 py-2 border 
-                ${error ? `border-red-600` : `border-gray-200`} 
-                rounded-md focus:outline-none focus-ring-1 focus:ring-teal-500`}
+            <input className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-teal-500`}
                 id={id}
                 type={type}
                 name={name}

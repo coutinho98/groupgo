@@ -4,7 +4,8 @@ import Input from '../../components/Input'
 import Checkbox from '../../components/Checkbox'
 import Button from '../../components/Button'
 import SocialButton from '../../components/SocialButton'
-import { GoogleIcon, GithubIcon } from '../../components/icons/Icons'
+import Divider from '../../components/Divider'
+import { GoogleIcon, FacebookIcon, GithubIcon } from '../../components/icons/Icons'
 import { Link } from 'react-router'
 
 const Login = ({ onLogin }) => {
@@ -23,6 +24,7 @@ const Login = ({ onLogin }) => {
     }
 
     const handleSubmit = (e) => {
+        //criar rotas para login
         e.preventDefault();
         console.log("log in", formData)
         onLogin();
@@ -51,7 +53,7 @@ const Login = ({ onLogin }) => {
                         ></Input>
 
                         <Input
-                            label="Password"
+                            label="password"
                             id="password"
                             type="password"
                             name="password"
@@ -81,10 +83,13 @@ const Login = ({ onLogin }) => {
                             sign up
                         </Link>
                     </p>
+
+                    <Divider text="or continue with" />
+
                     <div className="grid grid-cols-3 gap-3">
                         <SocialButton icon={<GoogleIcon />} onClick={() => console.log("google :):):)")}></SocialButton>
                         <SocialButton icon={<GithubIcon />} onClick={() => console.log("github :):):)")}></SocialButton>
-                        <SocialButton icon={<GithubIcon />} onClick={() => console.log("github :):):)")}></SocialButton>
+                        <SocialButton icon={<FacebookIcon />} onClick={() => console.log("facetruck :):):)")}></SocialButton>
                     </div>
                 </div>
             </div>
