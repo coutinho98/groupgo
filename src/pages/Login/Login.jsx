@@ -7,8 +7,11 @@ import SocialButton from '../../components/SocialButton'
 import Divider from '../../components/Divider'
 import { GoogleIcon, FacebookIcon, GithubIcon } from '../../components/icons/Icons'
 import { Link } from 'react-router'
+import { useReward } from 'react-rewards';
+
 
 const Login = ({ onLogin }) => {
+    const { reward: balloonsReward, isAnimating: isBalloonsAnimating } = useReward('balloonsReward', 'balloons');
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -75,11 +78,16 @@ const Login = ({ onLogin }) => {
                                 onChange={handleChange}
                                 label="remember me" />
 
-                            <Button type="submit">sign in</Button>
+                            <Button
+                                disabled={isBalloonsAnimating}
+                                onClick={() => {
+                                    balloonsReward();
+                                }}
+                                type="submit"> <span id="balloonsReward" /> sign in</Button>
                         </form>
                         <p className="mt-4 text-center text-sm text-gray-500">
                             dont have an account?{" "}
-                            <Link to="/signup" className='text-teal-600 hover:underline'>
+                            <Link to="/signup" className='text-teal-600 font-bold hover:underline'>
                                 sign up
                             </Link>
                         </p>
