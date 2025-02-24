@@ -7,6 +7,9 @@ import Divider from '../../components/Divider'
 import { GoogleIcon, FacebookIcon, GithubIcon } from '../../components/icons/Icons'
 import { Link, useNavigate } from 'react-router'
 import { useReward } from 'react-rewards';
+import Layout from '../../components/LoginPage/Layout'
+import Card from '../../components/LoginPage/Card'
+import Header from '../../components/LoginPage/Header'
 
 
 const Login = ({ onLogin }) => {
@@ -59,6 +62,7 @@ const Login = ({ onLogin }) => {
                     confettiReward();
                     navigate('/home');
                 }, 3000)
+
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || 'falhaa')
@@ -69,74 +73,65 @@ const Login = ({ onLogin }) => {
     }
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
-
-            <div className="flex-1 flex items-center justify-center">
-                <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-                    <div className="w-full max-w-sm p-6">
-                        <h1 className="text-4xl font-medium text-teal-700 text-center mb-2">Welcome to the GroupGo</h1>
-                        <p className="text-2x1 text-gray-500 text-center mb-5">sign in to your account </p>
-
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <Input
-                                label="email"
-                                id="email"
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder="email@hotmail.com"
-                                required
-                            ></Input>
-
-                            <Input
-                                label="password"
-                                id="password"
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                placeholder='*********'
-                                required
-                                rightElement={
-                                    <a href='#' className='text-xs text-teal-600 font-bold hover:underline'>
-                                        forgot password?
-                                    </a>
-                                }
-                            ></Input>
-
-                            <Checkbox
-                                id="rememberMe"
-                                name="rememberMe"
-                                checked={formData.rememberMe}
-                                onChange={handleChange}
-                                label="remember me" />
-
-                            <Button
-
-                                disabled={isConfettiAnimating}
-                                type="submit"> <span id="confettiReward" /> sign in
-                            </Button>
-                        </form>
-
-                        <p className="mt-4 text-center text-sm text-gray-500">
-                            dont have an account?{" "}
-                            <Link to="/signup" className='text-teal-600 font-bold hover:underline'>
-                                sign up
-                            </Link>
-                        </p>
-
-                        <Divider text="or continue with" />
-
-                        <div className="grid grid-cols-3 gap-3">
-                            <SocialButton icon={<GoogleIcon />} onClick={() => console.log("google :):):)")}></SocialButton>
-                            <SocialButton icon={<GithubIcon />} onClick={() => console.log("github :):):)")}></SocialButton>
-                            <SocialButton icon={<FacebookIcon />} onClick={() => console.log("facetruck :):):)")}></SocialButton>
-                        </div>
-                    </div>
+        <Layout>
+            <Card>
+                <Header
+                    title="Welcome to the GroupGo"
+                    subtitle="Sign in to your account"
+                />
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <Input
+                        label="email"
+                        id="email"
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="email@hotmail.com"
+                        required
+                    ></Input>
+                    <Input
+                        label="password"
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder='*********'
+                        required
+                        rightElement={
+                            <a href='#' className='text-xs text-teal-600 font-bold hover:underline'>
+                                forgot password?
+                            </a>
+                        }
+                    ></Input>
+                    <Checkbox
+                        id="rememberMe"
+                        name="rememberMe"
+                        checked={formData.rememberMe}
+                        onChange={handleChange}
+                        label="remember me">
+                    </Checkbox>
+                    <Button
+                        disabled={isConfettiAnimating}
+                        type="submit"> <span id="confettiReward" /> sign in
+                    </Button>
+                </form>
+                <p className="mt-4 text-center text-sm text-gray-500">
+                    dont have an account?{" "}
+                    <Link to="/signup" className='text-teal-600 font-bold hover:underline'>
+                        sign up
+                    </Link>
+                </p>
+                <Divider text="or continue with" />
+                <div className="grid grid-cols-3 gap-3">
+                    <SocialButton icon={<GoogleIcon />} onClick={() => console.log("google :):):)")}></SocialButton>
+                    <SocialButton icon={<GithubIcon />} onClick={() => console.log("github :):):)")}></SocialButton>
+                    <SocialButton icon={<FacebookIcon />} onClick={() => console.log("facetruck :):):)")}></SocialButton>
                 </div>
-            </div>
-        </div>
+            </Card>
+        </Layout>
+
     )
 }
 
