@@ -1,5 +1,11 @@
-export function Home() {
-    return (
-      <h1 className="flex items-center justify-center text-green-500 text-xl">Hi Shadys</h1>
-    );
-  }
+import Sidebar from "../../components/Siderbar";
+
+const Home = () => {
+  return (
+    <div className="flex min-h-screen bg-gray-50">
+    <Sidebar />
+    </div>
+  );
+}
+
+export default Home;

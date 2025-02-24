@@ -1,5 +1,4 @@
 import { useState } from "react"
-import Sidebar from '../../components/Siderbar'
 import Input from '../../components/Input'
 import Checkbox from '../../components/Checkbox'
 import Button from '../../components/Button'
@@ -31,7 +30,6 @@ const SignUp = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-50">
-            <Sidebar />
 
             <div className="flex-1 flex items-center justify-center">
                 <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
@@ -80,7 +78,6 @@ const SignUp = () => {
                                 checked={formData.agreeTerms}
                                 onChange={handleChange}
                                 label="i agree to the terms of service and privacy policy" />
-
                             <Button type="submit">sign up</Button>
                         </form>
                         <p className="mt-4 text-center text-sm text-gray-500">

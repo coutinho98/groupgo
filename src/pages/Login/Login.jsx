@@ -1,29 +1,32 @@
 import { useState } from 'react'
-import Sidebar from '../../components/Siderbar'
 import Input from '../../components/Input'
 import Checkbox from '../../components/Checkbox'
 import Button from '../../components/Button'
 import SocialButton from '../../components/SocialButton'
 import Divider from '../../components/Divider'
 import { GoogleIcon, FacebookIcon, GithubIcon } from '../../components/icons/Icons'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { useReward } from 'react-rewards';
 
 
 const Login = ({ onLogin }) => {
-    const { reward: balloonsReward, isAnimating: isBalloonsAnimating } = useReward('balloonsReward', 'balloons', {
-        elementCount: 30,
-        elementSize: 25,
+    const { reward: confettiReward, isAnimating: isConfettiAnimating } = useReward('confettiReward', 'confetti', {
+        elementCount: 50,
+        elementSize: 17,
         colors: ['#00bba7', '#ff53ac', '#5733FF', '#b79700'],
         position: 'fixed',
         fps: 60,
-        spread: 70
+        spread: 70,
+        lifetime: 400,
     });
     const [formData, setFormData] = useState({
         email: "",
         password: "",
         rememberMe: false
-    })
+    });
+    const navigate = useNavigate();
+    const [error, setError] = useState(null)
+
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -33,16 +36,40 @@ const Login = ({ onLogin }) => {
         }))
     }
 
-    const handleSubmit = (e) => {
-        //criar rotas para login
+    const handleSubmit = async (e) => {
+        console.log('handleSubmit chamado')
         e.preventDefault();
-        console.log("log in :):)", formData)
-        onLogin();
+        setError(null);
+        try {
+            const response = await fetch('https://groupgo.onrender.com/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                }),
+            });
+            console.log('status da resposta', response.status);
+            if (response.ok) {
+                const data = await response.json();
+                console.log("dados da resposta", data);
+                setTimeout(() => {
+                    confettiReward();
+                    navigate('/home');
+                }, 3000)
+            } else {
+                const errorData = await response.json();
+                setError(errorData.message || 'falhaa')
+            }
+        } catch (err) {
+            setError('error server')
+        }
     }
 
     return (
         <div className="flex min-h-screen bg-gray-50">
-            <Sidebar />
 
             <div className="flex-1 flex items-center justify-center">
                 <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
@@ -58,7 +85,7 @@ const Login = ({ onLogin }) => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="seuemail@hotmail.com"
+                                placeholder="email@hotmail.com"
                                 required
                             ></Input>
 
@@ -72,7 +99,7 @@ const Login = ({ onLogin }) => {
                                 placeholder='*********'
                                 required
                                 rightElement={
-                                    <a href='#' className='text-xs text-teal-600 hover:underline'>
+                                    <a href='#' className='text-xs text-teal-600 font-bold hover:underline'>
                                         forgot password?
                                     </a>
                                 }
@@ -86,12 +113,12 @@ const Login = ({ onLogin }) => {
                                 label="remember me" />
 
                             <Button
-                                disabled={isBalloonsAnimating}
-                                onClick={() => {
-                                    balloonsReward();
-                                }}
-                                type="submit"> <span id="balloonsReward" /> sign in</Button>
+
+                                disabled={isConfettiAnimating}
+                                type="submit"> <span id="confettiReward" /> sign in
+                            </Button>
                         </form>
+
                         <p className="mt-4 text-center text-sm text-gray-500">
                             dont have an account?{" "}
                             <Link to="/signup" className='text-teal-600 font-bold hover:underline'>
