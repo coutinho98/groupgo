@@ -1,8 +1,15 @@
 import SidebarButton from './SideBarButton';
-import { HomeIcon, MenuIcon, PlusIcon, UserIcon } from './icons/Icons'
+import { HomeIcon, MenuIcon, PlusIcon, UserIcon, LogoutIcon } from './icons/Icons'
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router';
 
 const Sidebar = () => {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        console.log('onlogout');
+        navigate('/login');
+    };
+
     return (
         <div className="w-16 h-screen bg-teal-700 flex flex-col items-center py-6 text-white">
             <motion.div
@@ -14,15 +21,14 @@ const Sidebar = () => {
                 </div>
             </motion.div>
             <div className="flex flex-col items-center space-y-8 mt-4">
-                <SidebarButton icon={<UserIcon />} />
+                <SidebarButton icon={<UserIcon />} active />
                 <SidebarButton icon={<HomeIcon />} />
                 <SidebarButton icon={<MenuIcon />} />
-                <SidebarButton icon={<PlusIcon />} active />
+                <SidebarButton icon={<PlusIcon />} />
             </div>
             <div className="mt-auto mb-6">
-                <div className="h-10 w-10 bg-gray-300 rounded-full"></div>
-            </div>
-        </div >
+                <SidebarButton icon={<LogoutIcon />} onClick={handleLogout} /> </div>
+        </div>
     )
 }
 

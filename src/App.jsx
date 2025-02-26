@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router'
+import { NavigationProvider } from './contexts/NavigationContext'
 import Routers from './Routers'
 
 // import { Home } from "./pages/Home/Home"
@@ -7,7 +8,9 @@ import Routers from './Routers'
 function App() {
   return (
     <BrowserRouter>
-      <Routers />
+      <NavigationProvider>
+        <Routers />
+      </NavigationProvider>
     </BrowserRouter>
   )
 }
