@@ -50,22 +50,23 @@ const Login = ({ onLogin }) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: formData.email,
+                    login: formData.email,
                     password: formData.password,
                 }),
             });
             console.log('status da resposta', response.status);
             if (response.ok) {
                 const data = await response.json();
+                confettiReward();
+
                 console.log("dados da resposta", data);
                 setTimeout(() => {
-                    confettiReward();
                     navigate('/home');
                 }, 3000)
 
             } else {
                 const errorData = await response.json();
-                setError(errorData.message || 'falhaa')
+                setError(errorData.message || 'falha')
             }
         } catch (err) {
             setError('error server')
@@ -131,7 +132,6 @@ const Login = ({ onLogin }) => {
                 </div>
             </Card>
         </Layout>
-
     )
 }
 

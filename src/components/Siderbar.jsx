@@ -1,5 +1,5 @@
 import SidebarButton from './SideBarButton';
-import { HomeIcon, MenuIcon, PlusIcon, UsersIcon } from './icons/Icons'
+import { HomeIcon, MenuIcon, PlusIcon, UserIcon } from './icons/Icons'
 import { motion } from 'framer-motion';
 
 const Sidebar = () => {
@@ -14,10 +14,10 @@ const Sidebar = () => {
                 </div>
             </motion.div>
             <div className="flex flex-col items-center space-y-8 mt-4">
-                <SidebarButton icon={<HomeIcon />} active />
+                <SidebarButton icon={<UserIcon />} />
+                <SidebarButton icon={<HomeIcon />} />
                 <SidebarButton icon={<MenuIcon />} />
-                <SidebarButton icon={<UsersIcon />} />
-                <SidebarButton icon={<PlusIcon />} />
+                <SidebarButton icon={<PlusIcon />} active />
             </div>
             <div className="mt-auto mb-6">
                 <div className="h-10 w-10 bg-gray-300 rounded-full"></div>
