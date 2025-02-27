@@ -1,8 +1,18 @@
-const SidebarButton = ({ icon, active = false, onClick }) => {
+const SidebarButton = ({ icon, label, active = false, onClick, path = null }) => {
     return (
-        <button className={`p-3 rounded-lg ${active ? `bg-teal-600` : `hover:bg-teal-600`} transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110`}
-            onClick={onClick}>
-            {icon}
+        <button
+            onClick={onClick}
+            className={`flex items-center w-full px-2 py-2 rounded-md transition-colors duration-200 ${active ? 'bg-teal-500' : 'hover:bg-gray-800'
+                }`}
+        >
+            <div className="flex items-center justify-center w-8 h-8">
+                {icon}
+            </div>
+            <div>
+                {label && (
+                    <span className="ml-3 text-sm font-medium">{label}</span>
+                )}
+            </div>
         </button>
     )
 }

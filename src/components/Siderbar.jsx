@@ -1,33 +1,56 @@
+import { useEffect, useState } from 'react';
 import SidebarButton from './SideBarButton';
-import { HomeIcon, MenuIcon, PlusIcon, UserIcon, LogoutIcon } from './icons/Icons'
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router';
+import { MenuIcon, UserIcon, LogoutIcon } from './icons/Icons'
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
     const navigate = useNavigate();
-    const handleLogout = () => {
-        console.log('onlogout');
-        navigate('/login');
+    const location = useLocation();
+    const [activePath, setActivePath] = useState("");
+
+    useEffect(() => {
+        setActivePath(location.pathname);
+    }, [location]);
+
+    const handleNavigation = (path) => {
+        if (path === '/logout') {
+            navigate('/login');
+            return;
+        }
+        navigate(path);
+        setActivePath(path);
     };
 
     return (
-        <div className="w-16 h-screen bg-teal-700 flex flex-col items-center py-6 text-white">
-            <motion.div
-                animate={{ x: [0, -5, 5, -5, 5, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-            >
-                <div className="h-12 w-12 rounded-full bg-teal-600 flex items-center justify-center mb-6 text-xl font-bold">
-                    GG
-                </div>
-            </motion.div>
-            <div className="flex flex-col items-center space-y-8 mt-4">
-                <SidebarButton icon={<UserIcon />} active />
-                <SidebarButton icon={<HomeIcon />} />
-                <SidebarButton icon={<MenuIcon />} />
-                <SidebarButton icon={<PlusIcon />} />
+        <div className="w-64 h-screen bg-gray-900 flex flex-col items-start py-6 text-white">
+
+            <h2 className="text-sm font-medium text-gray-300 mb-4">menu</h2>
+            <div className="flex flex-col items-start space-y-8 w-full px-3">
+                <SidebarButton
+                    icon={<MenuIcon />}
+                    label="Menu"
+                    path="/home"
+                    active={activePath === "/home"}
+                    onClick={() => handleNavigation("/home")}
+                />
+                <SidebarButton
+                    icon={<UserIcon />}
+                    label="Perfil" path="/perfil"
+                    active={activePath === "/perfil"}
+                    onClick={() => handleNavigation("/perfil")}
+                />
+
             </div>
-            <div className="mt-auto mb-6">
-                <SidebarButton icon={<LogoutIcon />} onClick={handleLogout} /> </div>
+            <div className="mt-auto mb-6 w-full px-3">
+                <h2 className="text-sm font-medium text-gray-300 mb-3">configurações</h2>
+                <SidebarButton
+                    icon={<LogoutIcon />}
+                    label="Logout"
+                    path="/"
+                    active={activePath === "/"}
+                    onClick={() => handleNavigation("/")}
+                />
+            </div>
         </div>
     )
 }
