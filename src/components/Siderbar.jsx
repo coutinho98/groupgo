@@ -23,7 +23,6 @@ const Sidebar = () => {
 
     return (
         <div className="w-64 h-screen bg-gray-900 flex flex-col items-start py-6 text-white">
-
             <h2 className="text-sm font-medium text-gray-300 mb-4">menu</h2>
             <div className="flex flex-col items-start space-y-8 w-full px-3">
                 <SidebarButton
