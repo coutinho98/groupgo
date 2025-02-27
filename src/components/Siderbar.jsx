@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import SidebarButton from './SideBarButton';
+import SidebarButton from './SidebarButton';
 import { MenuIcon, UserIcon, LogoutIcon } from './icons/Icons'
 import { useNavigate, useLocation } from 'react-router-dom';
 
