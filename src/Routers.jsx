@@ -10,7 +10,7 @@ export default function Routers() {
     return (
         <Routes>
             <Route exact path='/' element={<Login />} />
-            <Route path="/singup" element={<SignUp />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path='/forgotpassword' element={<ForgotPassword />} />
             <Route path='/perfil' element={<Perfil />} />
             <Route path='/Home' element={<Home />} />
