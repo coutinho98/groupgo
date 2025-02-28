@@ -101,7 +101,7 @@ const Login = ({ onLogin }) => {
                         placeholder='*********'
                         required
                         rightElement={
-                            <Link to="/perfil" className='text-teal-600 font-bold hover:underline'>
+                            <Link to="/forgotpassword" className='text-teal-600 font-bold hover:underline'>
                                 forgot password?{" "}
                             </Link>
                         }
