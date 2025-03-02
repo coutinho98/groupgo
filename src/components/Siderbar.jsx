@@ -38,7 +38,6 @@ const Sidebar = () => {
                     active={activePath === "/perfil"}
                     onClick={() => handleNavigation("/perfil")}
                 />
-
             </div>
             <div className="mt-auto mb-6 w-full px-3">
                 <h2 className="text-sm font-medium text-gray-300 mb-3">configurações</h2>

@@ -10,7 +10,7 @@ const Button = ({
     const basesStyles = 'py-2 rounded-md transition-colors'
     const variantStyles = {
         primary: "bg-teal-700 text-white hover:bg-teal-800",
-        secondary: "bg-gray200 text-gray-800 horver:bg-gray-300",
+        secondary: "bg-gray-200 text-gray-800 horver:bg-gray-300",
         outline: "bg-transparent border border-gray-300 text-gray-700 horver:bg-gray-60"
     };
 
