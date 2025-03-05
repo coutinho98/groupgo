@@ -26,7 +26,7 @@ const Sidebar = () => {
     return (
         <>
             <button onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden fixed top-4 left-4 z-50 bg-gray-800 text-teal-500 p-2">
+                className="lg:hidden fixed top-4 left-4 z-50 rounded-full bg-gray-800 text-teal-500 p-2">
                 <MenuIcon />
             </button>
 
@@ -74,7 +74,7 @@ const Sidebar = () => {
                     <div
                         className={`
                        w-64 h-full bg-gray-900 text-white
-                       absolute top-0 left-0
+                       absolute top-0 left-0 
                        transform transition-transform duration-300
                        ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
                    `}
