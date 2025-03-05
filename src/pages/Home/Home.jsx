@@ -22,6 +22,27 @@ const Home = () => {
               required
             >
             </Input>
+            <p className="text-sm">Participants</p>
+            <Input
+              className="flex-1"
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Participants"
+              required
+            >
+            </Input>
+            <p className="text-sm">Items</p>
+            <Input
+              className="flex-1"
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Items"
+              required
+            >
+            </Input>
+            <Button>Criar Evento</Button>
           </Card>
         </Layout>
       </div>

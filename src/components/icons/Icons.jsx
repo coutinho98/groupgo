@@ -66,4 +66,29 @@ export const LeftArrow = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-corner-down-left"><polyline points="9 10 4 15 9 20" />
         <path d="M20 4v7a4 4 0 0 1-4 4H4" />
     </svg>
-) 
+)
+
+export const ConfigurationIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-cog">
+        <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" />
+        <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+        <path d="M12 2v2" />
+        <path d="M12 22v-2" />
+        <path d="m17 20.66-1-1.73" />
+        <path d="M11 10.27 7 3.34" />
+        <path d="m20.66 17-1.73-1" />
+        <path d="m3.34 7 1.73 1" />
+        <path d="M14 12h8" /><path d="M2 12h2" />
+        <path d="m20.66 7-1.73 1" />
+        <path d="m3.34 17 1.73-1" />
+        <path d="m17 3.34-1 1.73" />
+        <path d="m11 13.73-4 6.93" />
+    </svg>
+)
+
+export const XIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+    </svg>
+)
