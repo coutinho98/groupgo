@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../../components/Siderbar"
 import AddressInfo from "../../components/Profile/AddressInfo"
 import ProfileCard from "../../components/Profile/ProfileCard";
@@ -14,6 +14,33 @@ const Perfil = () => {
         country: 'BRA',
         cityState: 'Salvador',
     })
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedData, setIsEditedData] = useState({ ...profileData })
+
+    const handleStartEditing = () => {
+        setIsEditing(true)
+        setIsEditedData({ ...profileData })
+    }
+
+    const handleSaveChanges = () => {
+        setProfileData(editedData)
+        setIsEditing(false)
+        localStorage.setItem('profileData', JSON.stringify(editedData))
+    }
+
+    const handleCancelEditing = () => {
+        setIsEditing(false)
+        setIsEditedData({ ...profileData })
+    }
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setIsEditedData(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
 
     return (
         <div className="flex">
