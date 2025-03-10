@@ -1,20 +1,22 @@
-const InfoField = ({ label, value, spanFull, name, isEditing, editedValue, onChange }) => {
+import Input from '../Input'
+
+const InfoField = ({ label, value, name, isEditing, editedValue, onChange }) => {
     return (
-        <div className={spanFull ? "col-span-2" : ""}>
-            <label className="block text-sm text-gray-500 mb-1">{label}</label>
+        <div>
+            <p className="text-sm text-gray-500">{label}</p>
             {isEditing ? (
-                <input
+                <Input
                     type="text"
                     name={name}
-                    value={editedValue || value}
+                    value={editedValue}
                     onChange={onChange}
-                    className="w-full p-2 border border-gray-300 rounded text-black"
+                    className="w-full p-2 border border-gray-300 rounded mt-1"
                 />
             ) : (
-                <div className="truncate text-black font-semibold">{value}</div>
+                <p className="font-medium">{value}</p>
             )}
         </div>
-    )
-}
+    );
+};
 
 export default InfoField;
