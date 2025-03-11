@@ -18,6 +18,17 @@ const SignUp = () => {
         agreeTerms: false
     })
 
+    const [passwordValidation, setPasswordVlidation] = useState({
+        minLenght: false,
+        hasUpperCase: false,
+        hasLowerCase: false,
+        hasNumber: false,
+        hasSpecial: false,
+        passwordMatch: false
+    })
+
+    const [passwordFocus, setPasswordFocus] = useState(false)
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData(prevData => ({
@@ -29,6 +40,14 @@ const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("sign in :):)")
+    }
+
+    const passwordValidate = () => {
+        if (formData.password != formData.confirmPassword) {
+            alert('senha diferente')
+        } else {
+            return true;
+        }
     }
 
     return (
@@ -72,14 +91,13 @@ const SignUp = () => {
                         required
                     ></Input>
 
-
                     <Checkbox
                         id="agreeTerms"
                         name="agreeTerms"
                         checked={formData.agreeTerms}
                         onChange={handleChange}
                         label="i agree to the terms of service and privacy policy" />
-                    <Button type="submit">sign up</Button>
+                    <Button type="submit" onClick={passwordValidate}>sign up</Button>
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-500">
                     already have an account?{" "}

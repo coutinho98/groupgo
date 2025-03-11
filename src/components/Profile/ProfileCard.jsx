@@ -58,7 +58,7 @@ const ProfileCard = ({ firstName, lastName, location, isEditing, editedData, onC
                     {isEditing ? (
                         <div className="space-y-2">
                             <div>
-                                <label className="block text-sm text-gray-600 mb-1">firstName</label>
+                                <label className="block text-sm text-gray-600 mb-1">first name</label>
                                 <Input
                                     type="text"
                                     name="firstName"
@@ -68,7 +68,7 @@ const ProfileCard = ({ firstName, lastName, location, isEditing, editedData, onC
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm text-gray-600 mb-1">lastName</label>
+                                <label className="block text-sm text-gray-600 mb-1">last name</label>
                                 <Input
                                     type="text"
                                     name="lastName"
