@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Input from '../../components/Input'
 import Checkbox from '../../components/Checkbox'
 import Button from '../../components/Button'
@@ -18,7 +18,7 @@ const SignUp = () => {
         agreeTerms: false
     })
 
-    const [passwordValidation, setPasswordVlidation] = useState({
+    const [passwordValidation, setPasswordValidation] = useState({
         minLenght: false,
         hasUpperCase: false,
         hasLowerCase: false,
@@ -29,6 +29,17 @@ const SignUp = () => {
 
     const [passwordFocus, setPasswordFocus] = useState(false)
 
+    const validationPassword = (password) => {
+        setPasswordValidation(prev => ({
+            ...prev,
+            minLenght: password.length >= 8,
+            hasUpperCase: /[A-Z]/.test(password),
+            hasLowerCase: /[a-z]/.test(password),
+            hasNumber: /[0-9]/.test(pássword),
+            hasSpecial: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password),
+        }))
+    }
+   
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData(prevData => ({
