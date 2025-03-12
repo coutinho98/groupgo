@@ -51,6 +51,13 @@ const SignUp = () => {
             ...prevData,
             [name]: type === 'checkbox' ? checked : value
         }))
+
+        if (name === 'password' ? value : formData.passwordd) {
+            validatePassword(
+                name === 'password' ? value : formData.password,
+                name === 'confirmPassword' ? value : formData.confirmPassword
+            )
+        }
     }
 
     const handleSubmit = (e) => {
