@@ -87,19 +87,19 @@ const SignUp = () => {
         const validations = {
             email: {
                 test: () => validateEmail(formData.email),
-                error: 'please, enter a valid email address'
+                error: 'Please, enter a valid email address'
             },
             password: {
                 test: () => validatePassword(formData.password, formData.confirmPassword),
-                error: 'password does not meet requirements'
+                error: 'Password does not meet requirements'
             },
             agreeTerms: {
                 test: () => formData.agreeTerms,
-                error: 'you need to agree to the terms'
+                error: 'You need to agree to the terms'
             },
             username: {
                 test: () => validateUsername(formData.username),
-                error: 'username must be at least 5 characters'
+                error: 'Username must be at least 5 characters'
             }
         };
 
@@ -156,7 +156,7 @@ const SignUp = () => {
                 />
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <Input
-                        label="username"
+                        label="Username"
                         id="username"
                         type="text"
                         name="username"
@@ -167,7 +167,7 @@ const SignUp = () => {
                         error={errors.username}
                     ></Input>
                     <Input
-                        label="email"
+                        label="Email"
                         id="email"
                         type="email"
                         name="email"
@@ -179,7 +179,7 @@ const SignUp = () => {
                     ></Input>
 
                     <Input
-                        label="password"
+                        label="Password"
                         id="password"
                         type="password"
                         name="password"
@@ -191,7 +191,7 @@ const SignUp = () => {
                     ></Input>
 
                     <Input
-                        label="confirm password"
+                        label="Confirm Password"
                         id="confirmPassword"
                         type="password"
                         name="confirmPassword"
@@ -206,7 +206,7 @@ const SignUp = () => {
                         name="agreeTerms"
                         checked={formData.agreeTerms}
                         onChange={handleChange}
-                        label="i agree to the terms of service and privacy policy"
+                        label="I agree to the terms of service and privacy policy"
                         error={errors.agreeTerms} />
                     <Button type="submit" disabled={isLoading || isConfettiAnimating}>
                         {isLoading ? 'loading...' : 'sign up'}

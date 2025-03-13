@@ -5,6 +5,8 @@ import SignUp from "./pages/SignIn/SignIn"
 import Perfil from "./pages/Perfil/Perfil"
 import Home from "./pages/Home/Home"
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword"
+import TermsOfService from "./pages/Terms/TermsOfService"
+import PrivacyPolicy from "./pages/Terms/PrivacyPolicy"
 
 export default function Routers() {
     return (
@@ -14,6 +16,8 @@ export default function Routers() {
             <Route path='/forgotpassword' element={<ForgotPassword />} />
             <Route path='/perfil' element={<Perfil />} />
             <Route path='/Home' element={<Home />} />
+            <Route path='/termsofservice' element={<TermsOfService />} />
+            <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
         </Routes>
     )
 }
