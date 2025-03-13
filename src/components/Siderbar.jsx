@@ -46,7 +46,6 @@ const Sidebar = () => {
                         active={activePath === "/home"}
                         onClick={() => handleNavigation("/home")}
                     />
-
                 </div>
                 <div className="mt-auto mb-6 w-full px-3 space-y-8">
                     <h2 className="text-sm font-medium  text-gray-300">configurações</h2>

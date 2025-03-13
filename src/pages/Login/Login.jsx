@@ -13,15 +13,7 @@ import Header from '../../components/LoginPage/Header'
 
 
 const Login = ({ onLogin }) => {
-    const { reward: confettiReward, isAnimating: isConfettiAnimating } = useReward('confettiReward', 'confetti', {
-        elementCount: 50,
-        elementSize: 17,
-        colors: ['#00bba7', '#ff53ac', '#5733FF', '#b79700'],
-        position: 'fixed',
-        fps: 60,
-        spread: 70,
-        lifetime: 400,
-    });
+   
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -57,7 +49,6 @@ const Login = ({ onLogin }) => {
             console.log('status da resposta', response.status);
             if (response.ok) {
                 const data = await response.json();
-                confettiReward();
 
                 console.log("dados da resposta", data);
                 setTimeout(() => {
@@ -114,8 +105,7 @@ const Login = ({ onLogin }) => {
                         label="remember me">
                     </Checkbox>
                     <Button
-                        disabled={isConfettiAnimating}
-                        type="submit"> <span id="confettiReward" /> sign in
+                        type="submit"> sign in
                     </Button>
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-500">

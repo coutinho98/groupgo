@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { useReward } from 'react-rewards';
+import toast, { Toaster } from "react-hot-toast"
 import Input from '../../components/Input'
 import Checkbox from '../../components/Checkbox'
 import Button from '../../components/Button'
@@ -11,12 +13,26 @@ import Card from '../../components/LoginPage/Card'
 import Header from '../../components/LoginPage/Header'
 
 const SignUp = () => {
+    const { reward: confettiReward, isAnimating: isConfettiAnimating } = useReward('confettiReward', 'confetti', {
+        elementCount: 50,
+        elementSize: 17,
+        colors: ['#00bba7', '#ff53ac', '#5733FF', '#b79700'],
+        position: 'fixed',
+        fps: 60,
+        spread: 70,
+        lifetime: 400,
+    });
+
     const [formData, setFormData] = useState({
+        username: "",
         email: "",
         password: "",
         confirmPassword: "",
         agreeTerms: false
     })
+
+    const [errors, setErrors] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
 
     const [passwordValidation, setPasswordValidation] = useState({
         minLength: false,
@@ -26,8 +42,6 @@ const SignUp = () => {
         hasSpecial: false,
         passwordMatch: false
     })
-
-    const [passwordFocus, setPasswordFocus] = useState(false)
 
     const validatePassword = (password) => {
         setPasswordValidation(prev => ({
@@ -62,16 +76,26 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("sign in :):)")
+        setErrors({});
+
+        const validation = {
+            email: {
+                test: () => validateEmail(formData.email),
+                error: 'please, enter a valid email address'
+            },
+            password: {
+                test: () => validatePassword(formData.password),
+                error: 'password does not meet requirements'
+            },
+            agreeTerm: {
+                test: () => formData.agreeTerms,
+                error: 'you need to agree to the terms'
+            }
+        }
+
     }
 
-    const passwordValidate = () => {
-        if (formData.password != formData.confirmPassword) {
-            alert('senha diferente')
-        } else {
-            return true;
-        }
-    }
+
 
     return (
         <Layout>
@@ -81,6 +105,16 @@ const SignUp = () => {
                     subtitle="sign up to start using our service"
                 />
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    <Input
+                        label="username"
+                        id="username"
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder="@username"
+                        required
+                    ></Input>
                     <Input
                         label="email"
                         id="email"
@@ -120,7 +154,9 @@ const SignUp = () => {
                         checked={formData.agreeTerms}
                         onChange={handleChange}
                         label="i agree to the terms of service and privacy policy" />
-                    <Button type="submit" onClick={passwordValidate}>sign up</Button>
+                    <Button type="submit" disabled={isConfettiAnimating} onClick={() => {
+                        confettiReward();
+                    }}/*  onClick={passwordValidate} */> <span id="confettiReward" /> sign up</Button>
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-500">
                     already have an account?{" "}
@@ -137,7 +173,7 @@ const SignUp = () => {
                     <SocialButton icon={<FacebookIcon />} onClick={() => console.log("facetruck :):):)")}></SocialButton>
                 </div>
             </Card>
-        </Layout>
+        </Layout >
     )
 }
 
