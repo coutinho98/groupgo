@@ -43,15 +43,17 @@ const SignUp = () => {
         passwordMatch: false
     })
 
-    const validatePassword = (password) => {
-        setPasswordValidation(prev => ({
-            ...prev,
-            minLenght: password.length >= 8,
+    const validatePassword = (password, confirmPassword) => {
+        const validation = {
+            minLength: password.length >= 8,
             hasUpperCase: /[A-Z]/.test(password),
             hasLowerCase: /[a-z]/.test(password),
             hasNumber: /[0-9]/.test(password),
             hasSpecial: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password),
-        }))
+            passwordMatch: password === confirmPassword && password !== ''
+        };
+        setPasswordValidation(validation)
+        return Object.values(validation).every(Boolean)
     }
 
     const validateEmail = (email) => {
@@ -59,14 +61,18 @@ const SignUp = () => {
         return emailRegex.test(email);
     }
 
+    const validateUsername = (username) => {
+        return username && username.length >= 5;
+    }
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData(prevData => ({
             ...prevData,
             [name]: type === 'checkbox' ? checked : value
-        }))
+        }));
 
-        if (name === 'password' ? value : formData.passwordd) {
+        if (name === 'password' || name === 'confirmPassword') {
             validatePassword(
                 name === 'password' ? value : formData.password,
                 name === 'confirmPassword' ? value : formData.confirmPassword
@@ -78,27 +84,71 @@ const SignUp = () => {
         e.preventDefault();
         setErrors({});
 
-        const validation = {
+        const validations = {
             email: {
                 test: () => validateEmail(formData.email),
                 error: 'please, enter a valid email address'
             },
             password: {
-                test: () => validatePassword(formData.password),
+                test: () => validatePassword(formData.password, formData.confirmPassword),
                 error: 'password does not meet requirements'
             },
-            agreeTerm: {
+            agreeTerms: {
                 test: () => formData.agreeTerms,
                 error: 'you need to agree to the terms'
+            },
+            username: {
+                test: () => validateUsername(formData.username),
+                error: 'username must be at least 5 characters'
             }
+        };
+
+        const newErrors = Object.entries(validations).reduce((errors, [field, { test, error }]) => {
+            if (!test()) {
+                errors[field] = error;
+            }
+            return errors;
+        }, {});
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            Object.values(newErrors).forEach(errorMsg => {
+                toast.error(errorMsg, {
+                    duration: 3000,
+                    position: 'top-center'
+                })
+            })
+            console.log('erros: ', newErrors)
+            return;
         }
 
+        const loadingToast = toast.loading('creating account');
+        setIsLoading(true);
+
+        setTimeout(() => {
+            setIsLoading(false);
+            toast.dismiss(loadingToast);
+            toast.success('account created successfully', {
+                duration: 4000,
+                position: 'top-center'
+            })
+            confettiReward();
+        }, 1000)
     }
-
-
 
     return (
         <Layout>
+            <Toaster
+                position="top-center"
+                toastOptions={{
+                    style: {
+                        marginTop: '20px',
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    }
+                }}
+            />
             <Card>
                 <Header
                     title="Create Account"
@@ -114,6 +164,7 @@ const SignUp = () => {
                         onChange={handleChange}
                         placeholder="@username"
                         required
+                        error={errors.username}
                     ></Input>
                     <Input
                         label="email"
@@ -124,6 +175,7 @@ const SignUp = () => {
                         onChange={handleChange}
                         placeholder="seuemail@hotmail.com"
                         required
+                        error={errors.email}
                     ></Input>
 
                     <Input
@@ -135,6 +187,7 @@ const SignUp = () => {
                         onChange={handleChange}
                         placeholder='*********'
                         required
+                        error={errors.password}
                     ></Input>
 
                     <Input
@@ -153,11 +206,14 @@ const SignUp = () => {
                         name="agreeTerms"
                         checked={formData.agreeTerms}
                         onChange={handleChange}
-                        label="i agree to the terms of service and privacy policy" />
-                    <Button type="submit" disabled={isConfettiAnimating} onClick={() => {
-                        confettiReward();
-                    }}/*  onClick={passwordValidate} */> <span id="confettiReward" /> sign up</Button>
+                        label="i agree to the terms of service and privacy policy"
+                        error={errors.agreeTerms} />
+                    <Button type="submit" disabled={isLoading || isConfettiAnimating}>
+                        {isLoading ? 'loading...' : 'sign up'}
+                    </Button>
+                    <span id="confettiReward" className="fixed left-1/2" />
                 </form>
+
                 <p className="mt-4 text-center text-sm text-gray-500">
                     already have an account?{" "}
                     <Link to="/" className='text-teal-600 font-bold hover:underline'>
