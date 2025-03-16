@@ -35,7 +35,7 @@ const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const [passwordValidation, setPasswordValidation] = useState({
-        minLength: false,
+        length: false,
         hasUpperCase: false,
         hasLowerCase: false,
         hasNumber: false,
@@ -45,7 +45,7 @@ const SignUp = () => {
 
     const validatePassword = (password, confirmPassword) => {
         const validation = {
-            minLength: password.length >= 8,
+            length: password.length >= 8,
             hasUpperCase: /[A-Z]/.test(password),
             hasLowerCase: /[a-z]/.test(password),
             hasNumber: /[0-9]/.test(password),
@@ -118,18 +118,17 @@ const SignUp = () => {
                     position: 'top-center'
                 })
             })
-            console.log('erros: ', newErrors)
             return;
         }
 
-        const loadingToast = toast.loading('creating account');
+        const loadingToast = toast.loading('Creating Account');
         setIsLoading(true);
 
         setTimeout(() => {
             setIsLoading(false);
             toast.dismiss(loadingToast);
-            toast.success('account created successfully', {
-                duration: 4000,
+            toast.success('Account Created Successfully', {
+                duration: 1000,
                 position: 'top-center'
             })
             confettiReward();
@@ -142,7 +141,7 @@ const SignUp = () => {
                 position="top-center"
                 toastOptions={{
                     style: {
-                        marginTop: '20px',
+                        marginTop: '10px',
                         borderRadius: '10px',
                         background: '#333',
                         color: '#fff',
@@ -162,7 +161,7 @@ const SignUp = () => {
                         name="username"
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder="@username"
+                        placeholder="Username"
                         required
                         error={errors.username}
                     ></Input>
@@ -173,7 +172,7 @@ const SignUp = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="seuemail@hotmail.com"
+                        placeholder="Seu email principal"
                         required
                         error={errors.email}
                     ></Input>
@@ -200,7 +199,26 @@ const SignUp = () => {
                         placeholder='*********'
                         required
                     ></Input>
-
+                    <div className="bg-blue-50 p-3 rounded-lg text-sm space-y-1">
+                        <p className={`flex items-center gap-1 ${passwordValidation.length ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
+                            <span className="mr-1">✓</span> 8-16 characters in length
+                        </p>
+                        <p className={`flex items-center gap-1 ${passwordValidation.hasLowerCase ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
+                            <span className="mr-1">✓</span> lower case letter
+                        </p>
+                        <p className={`flex items-center gap-1 ${passwordValidation.hasUpperCase ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
+                            <span className="mr-1">✓</span> upper case letter
+                        </p>
+                        <p className={`flex items-center gap-1 ${passwordValidation.hasNumber ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
+                            <span className="mr-1">✓</span> numeric character
+                        </p>
+                        <p className={`flex items-center gap-1 ${passwordValidation.hasSpecial ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
+                            <span className="mr-1">✓</span> special character: $ @ # % ^ & * ? _ + =
+                        </p>
+                        <p className={`flex items-center gap-1 ${passwordValidation.passwordMatch ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
+                            <span className="mr-1">✓</span> passwords match
+                        </p>
+                    </div>
                     <Checkbox
                         id="agreeTerms"
                         name="agreeTerms"
@@ -209,7 +227,7 @@ const SignUp = () => {
                         label="I agree to the terms of service and privacy policy"
                         error={errors.agreeTerms} />
                     <Button type="submit" disabled={isLoading || isConfettiAnimating}>
-                        {isLoading ? 'loading...' : 'sign up'}
+                        {isLoading ? 'Loading...' : 'Sign Up'}
                     </Button>
                     <span id="confettiReward" className="fixed left-1/2" />
                 </form>
