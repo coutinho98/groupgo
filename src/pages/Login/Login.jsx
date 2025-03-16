@@ -13,7 +13,7 @@ import Header from '../../components/LoginPage/Header'
 
 
 const Login = ({ onLogin }) => {
-   
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -73,7 +73,7 @@ const Login = ({ onLogin }) => {
                 />
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <Input
-                        label="email"
+                        label="Email"
                         id="email"
                         type="email"
                         name="email"
@@ -83,7 +83,7 @@ const Login = ({ onLogin }) => {
                         required
                     ></Input>
                     <Input
-                        label="password"
+                        label="Password"
                         id="password"
                         type="password"
                         name="password"
@@ -93,25 +93,26 @@ const Login = ({ onLogin }) => {
                         required
                         rightElement={
                             <Link to="/forgotpassword" className='text-teal-600 font-bold hover:underline'>
-                                forgot password?{" "}
+                                Forgot Password?{" "}
                             </Link>
                         }
                     ></Input>
                     <Checkbox
+                        label="Remember me"
                         id="rememberMe"
                         name="rememberMe"
                         checked={formData.rememberMe}
                         onChange={handleChange}
-                        label="remember me">
+                    >
                     </Checkbox>
                     <Button
                         type="submit"> sign in
                     </Button>
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-500">
-                    dont have an account?{" "}
+                    Dont have an account?{" "}
                     <Link to="/signup" className='text-teal-600 font-bold hover:underline'>
-                        sign up
+                        Sign Up
                     </Link>
                 </p>
                 <Divider text="or continue with" />

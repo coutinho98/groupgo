@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .animate-oil-water {
+        background: radial-gradient(circle at 50% 50%, rgba(94, 234, 212, 0.6), rgba(147, 51, 234, 0.4), rgba(236, 72, 153, 0.5), transparent 70%);
+        background-size: 150% 150%;
+        animation: oilWaterFlow 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes oilWaterFlow {
+        0% {
+            transform: translate(-20%, -20%) scale(1);
+            background-position: 0% 0%;
+        }
+
+        25% {
+            transform: translate(20%, 10%) scale(1.1);
+            background-position: 50% 50%;
+        }
+
+        50% {
+            transform: translate(-10%, 20%) scale(1.05);
+            background-position: 100% 100%;
+        }
+
+        75% {
+            transform: translate(10%, -10%) scale(1.1);
+            background-position: 50% 0%;
+        }
+
+        100% {
+            transform: translate(-20%, -20%) scale(1);
+            background-position: 0% 0%;
+        }
+    }
+}

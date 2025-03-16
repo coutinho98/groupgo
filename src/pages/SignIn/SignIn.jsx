@@ -152,7 +152,7 @@ const SignUp = () => {
             <Card>
                 <Header
                     title="Create Account"
-                    subtitle="sign up to start using our service"
+                    subtitle="Sign up to start using our service"
                 />
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <Input
@@ -215,9 +215,9 @@ const SignUp = () => {
                 </form>
 
                 <p className="mt-4 text-center text-sm text-gray-500">
-                    already have an account?{" "}
+                    Already have an account?{" "}
                     <Link to="/" className='text-teal-600 font-bold hover:underline'>
-                        sign in
+                        Sign In
                     </Link>
                 </p>
 
