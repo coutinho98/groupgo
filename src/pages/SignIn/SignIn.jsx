@@ -121,18 +121,18 @@ const SignUp = () => {
             return;
         }
 
-        const loadingToast = toast.loading('Creating Account');
+        const loadingToast = toast.loading('Criando Cota');
         setIsLoading(true);
 
         setTimeout(() => {
             setIsLoading(false);
             toast.dismiss(loadingToast);
-            toast.success('Account Created Successfully', {
-                duration: 1000,
+            toast.success('Conta Criada com Sucesso', {
+                duration: 3000,
                 position: 'top-center'
             })
             confettiReward();
-        }, 1000)
+        }, 3000)
     }
 
     return (
@@ -150,18 +150,18 @@ const SignUp = () => {
             />
             <Card>
                 <Header
-                    title="Create Account"
-                    subtitle="Sign up to start using our service"
+                    title="Criar sua conta"
+                    subtitle="Cadastre-se para começar a usar nosso serviço"
                 />
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <Input
-                        label="Username"
+                        label="Usuário"
                         id="username"
                         type="text"
                         name="username"
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder="Username"
+                        placeholder="Usuário"
                         required
                         error={errors.username}
                     ></Input>
@@ -178,7 +178,7 @@ const SignUp = () => {
                     ></Input>
 
                     <Input
-                        label="Password"
+                        label="Senha"
                         id="password"
                         type="password"
                         name="password"
@@ -190,7 +190,7 @@ const SignUp = () => {
                     ></Input>
 
                     <Input
-                        label="Confirm Password"
+                        label="Confirmar Senha"
                         id="confirmPassword"
                         type="password"
                         name="confirmPassword"
@@ -201,22 +201,22 @@ const SignUp = () => {
                     ></Input>
                     <div className="bg-blue-50 p-3 rounded-lg text-sm space-y-1">
                         <p className={`flex items-center gap-1 ${passwordValidation.length ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
-                            <span className="mr-1">✓</span> 8-16 characters in length
+                            <span className="mr-1">✓</span> 8-16 Caracteres
                         </p>
                         <p className={`flex items-center gap-1 ${passwordValidation.hasLowerCase ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
-                            <span className="mr-1">✓</span> lower case letter
+                            <span className="mr-1">✓</span> Letra Minúscula
                         </p>
                         <p className={`flex items-center gap-1 ${passwordValidation.hasUpperCase ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
-                            <span className="mr-1">✓</span> upper case letter
+                            <span className="mr-1">✓</span> Letra Maiúscula
                         </p>
                         <p className={`flex items-center gap-1 ${passwordValidation.hasNumber ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
-                            <span className="mr-1">✓</span> numeric character
+                            <span className="mr-1">✓</span> Númer
                         </p>
                         <p className={`flex items-center gap-1 ${passwordValidation.hasSpecial ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
-                            <span className="mr-1">✓</span> special character: $ @ # % ^ & * ? _ + =
+                            <span className="mr-1">✓</span> Caractere Especial: $ @ # % ^ & * ? _ + =
                         </p>
                         <p className={`flex items-center gap-1 ${passwordValidation.passwordMatch ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
-                            <span className="mr-1">✓</span> passwords match
+                            <span className="mr-1">✓</span> Senhas Iguais
                         </p>
                     </div>
                     <Checkbox
@@ -224,22 +224,27 @@ const SignUp = () => {
                         name="agreeTerms"
                         checked={formData.agreeTerms}
                         onChange={handleChange}
-                        label="I agree to the terms of service and privacy policy"
+                        label={
+                            <span>
+                                Concordo com os <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Termos de politica</a> e <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">privacidade</a>
+                            </span>
+                        }
                         error={errors.agreeTerms} />
                     <Button type="submit" disabled={isLoading || isConfettiAnimating}>
-                        {isLoading ? 'Loading...' : 'Sign Up'}
+                        {isLoading ? 'Criando...' : 'Cria conta'}
                     </Button>
                     <span id="confettiReward" className="fixed left-1/2" />
                 </form>
 
                 <p className="mt-4 text-center text-sm text-gray-500">
-                    Already have an account?{" "}
+                    Já tem uma conta?{" "}
                     <Link to="/" className='text-teal-600 font-bold hover:underline'>
-                        Sign In
+                        Entrar
                     </Link>
                 </p>
 
-                <Divider text="or continue with" />
+                <Divider text="ou continuar com
+" />
 
                 <div className="grid grid-cols-3 gap-3">
                     <SocialButton icon={<GoogleIcon />} onClick={() => console.log("google :):):)")}></SocialButton>

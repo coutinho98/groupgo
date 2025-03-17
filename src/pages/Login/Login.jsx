@@ -6,7 +6,6 @@ import SocialButton from '../../components/SocialButton'
 import Divider from '../../components/Divider'
 import { GoogleIcon, FacebookIcon, GithubIcon } from '../../components/icons/Icons'
 import { Link, useNavigate } from 'react-router'
-import { useReward } from 'react-rewards';
 import Layout from '../../components/LoginPage/Layout'
 import Card from '../../components/LoginPage/Card'
 import Header from '../../components/LoginPage/Header'
@@ -32,7 +31,6 @@ const Login = ({ onLogin }) => {
     }
 
     const handleSubmit = async (e) => {
-        console.log('handleSubmit chamado')
         e.preventDefault();
         setError(null);
         try {
@@ -46,14 +44,12 @@ const Login = ({ onLogin }) => {
                     password: formData.password,
                 }),
             });
-            console.log('status da resposta', response.status);
             if (response.ok) {
                 const data = await response.json();
 
-                console.log("dados da resposta", data);
                 setTimeout(() => {
                     navigate('/home');
-                }, 3000)
+                })
 
             } else {
                 const errorData = await response.json();
@@ -79,7 +75,7 @@ const Login = ({ onLogin }) => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="email@hotmail.com"
+                        placeholder="Email"
                         required
                     ></Input>
                     <Input
