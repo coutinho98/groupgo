@@ -64,8 +64,8 @@ const Login = ({ onLogin }) => {
         <Layout>
             <Card>
                 <Header
-                    title="Welcome to the GroupGo"
-                    subtitle="Sign in to your account"
+                    title="Bem-vindo ao GroupGo"
+                    subtitle="Entre na sua conta"
                 />
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <Input
@@ -79,7 +79,7 @@ const Login = ({ onLogin }) => {
                         required
                     ></Input>
                     <Input
-                        label="Password"
+                        label="Senha"
                         id="password"
                         type="password"
                         name="password"
@@ -88,13 +88,13 @@ const Login = ({ onLogin }) => {
                         placeholder='*********'
                         required
                         rightElement={
-                            <Link to="/forgotpassword" className='text-teal-600 font-bold hover:underline'>
-                                Forgot Password?{" "}
+                            <Link to="/forgotpassword" className='text-teal-600 font-medium text-xs hover:underline'>
+                                Esqueceu sua senha?{" "}
                             </Link>
                         }
                     ></Input>
                     <Checkbox
-                        label="Remember me"
+                        label="Lembre de mim"
                         id="rememberMe"
                         name="rememberMe"
                         checked={formData.rememberMe}
@@ -102,16 +102,16 @@ const Login = ({ onLogin }) => {
                     >
                     </Checkbox>
                     <Button
-                        type="submit"> sign in
+                        type="submit"> Entrar
                     </Button>
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-500">
-                    Dont have an account?{" "}
+                    Não tem uma conta? {" "}
                     <Link to="/signup" className='text-teal-600 font-bold hover:underline'>
-                        Sign Up
+                        Inscreva-se
                     </Link>
                 </p>
-                <Divider text="or continue with" />
+                <Divider text="ou continuar com" />
                 <div className="grid grid-cols-3 gap-3">
                     <SocialButton icon={<GoogleIcon />} onClick={() => console.log("google :):):)")}></SocialButton>
                     <SocialButton icon={<GithubIcon />} onClick={() => console.log("github :):):)")}></SocialButton>

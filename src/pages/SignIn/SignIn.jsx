@@ -231,7 +231,7 @@ const SignUp = () => {
                         }
                         error={errors.agreeTerms} />
                     <Button type="submit" disabled={isLoading || isConfettiAnimating}>
-                        {isLoading ? 'Criando...' : 'Cria conta'}
+                        {isLoading ? 'Criando...' : 'Criar Conta'}
                     </Button>
                     <span id="confettiReward" className="fixed left-1/2" />
                 </form>
