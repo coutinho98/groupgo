@@ -6,8 +6,8 @@ import Checkbox from '../../components/Checkbox'
 import Button from '../../components/Button'
 import SocialButton from '../../components/SocialButton'
 import Divider from '../../components/Divider'
-import { GoogleIcon, FacebookIcon, GithubIcon } from '../../components/icons/Icons'
-import { Link } from 'react-router'
+import { GoogleIcon, FacebookIcon, GithubIcon, LeftArrow } from '../../components/icons/Icons'
+import { Link, useNavigate } from 'react-router'
 import Layout from '../../components/LoginPage/Layout'
 import Card from '../../components/LoginPage/Card'
 import Header from '../../components/LoginPage/Header'
@@ -23,6 +23,7 @@ const SignUp = () => {
         lifetime: 400,
     });
 
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -80,26 +81,26 @@ const SignUp = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
 
         const validations = {
             email: {
                 test: () => validateEmail(formData.email),
-                error: 'Please, enter a valid email address'
+                error: 'Por favor, digite um email válido'
             },
             password: {
                 test: () => validatePassword(formData.password, formData.confirmPassword),
-                error: 'Password does not meet requirements'
+                error: 'A senha não atende aos requisitos'
             },
             agreeTerms: {
                 test: () => formData.agreeTerms,
-                error: 'You need to agree to the terms'
+                error: 'Você precisa concordar com os termos'
             },
             username: {
                 test: () => validateUsername(formData.username),
-                error: 'Username must be at least 5 characters'
+                error: 'O nome de usuário deve ter pelo menos 5 caracteres'
             }
         };
 
@@ -121,18 +122,58 @@ const SignUp = () => {
             return;
         }
 
-        const loadingToast = toast.loading('Criando Cota');
+        const loadingToast = toast.loading('Criando Conta');
         setIsLoading(true);
 
-        setTimeout(() => {
-            setIsLoading(false);
+        try {
+            const response = await fetch('https://groupgo.onrender.com/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: formData.username,
+                    email: formData.email,
+                    password: formData.password
+                }),
+            });
+
+            setIsLoading(false)
             toast.dismiss(loadingToast);
-            toast.success('Conta Criada com Sucesso', {
+
+            if (response.ok) {
+                const data = await response.json();
+
+                setTimeout(() => {
+                    toast.success('Conta Criada com Sucesso', {
+                        duration: 3000,
+                        position: 'top-center'
+                    });
+                    confettiReward()
+
+                    setTimeout(() => {
+                        navigate('/perfil')
+                    }, 3500);
+                }, 500)
+            }
+            else {
+                const errorData = await response.json();
+                setErros(errorData.message || 'Falha ao criar conta')
+                toast.error(errorData.message || 'Falha ao criar conta', {
+                    duration: 3000,
+                    position: 'top-center'
+                });
+            }
+        } catch (err) {
+            setIsLoading(false);
+            toast.dismiss(loadingToast)
+            setErrors('Erro no server')
+            toast.error('Error no servidor', {
                 duration: 3000,
                 position: 'top-center'
             })
-            confettiReward();
-        }, 3000)
+        }
+
     }
 
     return (
@@ -149,6 +190,8 @@ const SignUp = () => {
                 }}
             />
             <Card>
+                 <button className="-ml-1 text-teal-700"> <Link to="/"><LeftArrow />
+                                </Link></button>
                 <Header
                     title="Criar sua conta"
                     subtitle="Cadastre-se para começar a usar nosso serviço"
@@ -210,7 +253,7 @@ const SignUp = () => {
                             <span className="mr-1">✓</span> Letra Maiúscula
                         </p>
                         <p className={`flex items-center gap-1 ${passwordValidation.hasNumber ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
-                            <span className="mr-1">✓</span> Númer
+                            <span className="mr-1">✓</span> Número
                         </p>
                         <p className={`flex items-center gap-1 ${passwordValidation.hasSpecial ? 'text-teal-600 font-medium' : 'text-gray-400'}`}>
                             <span className="mr-1">✓</span> Caractere Especial: $ @ # % ^ & * ? _ + =
