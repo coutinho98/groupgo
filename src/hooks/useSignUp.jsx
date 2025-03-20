@@ -133,7 +133,6 @@ const useSignUp = () => {
             toast.dismiss(loadingToast);
 
             if (response.ok) {
-                const data = await response.json();
 
                 setTimeout(() => {
                     toast.success('Conta Criada com Sucesso', {
