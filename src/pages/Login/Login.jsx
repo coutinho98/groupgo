@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
     });
     const navigate = useNavigate();
     const [error, setError] = useState(null)
-
+    const { setToken } = useAuth();
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -46,10 +46,11 @@ const Login = ({ onLogin }) => {
             });
             if (response.ok) {
                 const data = await response.json();
+                setToken(data.token)
 
                 setTimeout(() => {
-                    navigate('/home');
-                })
+                    navigate('/perfil');
+                }, 500)
 
             } else {
                 const errorData = await response.json();

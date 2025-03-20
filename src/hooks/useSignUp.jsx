@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router"
 import { useReward } from "react-rewards"
 import toast from "react-hot-toast"
+import { useAuth } from "../contexts/AuthContext"
+
 
 const useSignUp = () => {
     const { reward: confettiReward, isAnimating: isConfettiAnimating } = useReward('confettiReward', 'confetti', {
@@ -25,6 +27,8 @@ const useSignUp = () => {
 
     const [errors, setErrors] = useState({})
     const [isLoading, setIsLoading] = useState(false)
+
+    const { setToken } = useAuth();
 
     const [passwordValidation, setPasswordValidation] = useState({
         length: false,
@@ -117,7 +121,7 @@ const useSignUp = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('https://groupgo.onrender.com/users', {
+            const response = await fetch('https://groupgo.onrender.com/user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -133,6 +137,9 @@ const useSignUp = () => {
             toast.dismiss(loadingToast);
 
             if (response.ok) {
+                const data = response.json();
+                console.log({ data });
+                setToken(data.token);
 
                 setTimeout(() => {
                     toast.success('Conta Criada com Sucesso', {
@@ -149,7 +156,7 @@ const useSignUp = () => {
             else {
                 const errorData = await response.json();
                 setErrors(errorData.message || 'Falha ao criar conta')
-                toast.error(errorData.message || 'Falha ao criar conta', {
+                toast.error('Falha ao criar conta!' || 'Falha ao criar conta', {
                     duration: 3000,
                     position: 'top-center'
                 });
