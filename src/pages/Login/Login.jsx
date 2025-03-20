@@ -1,14 +1,17 @@
 import { useState } from 'react'
+import { Toaster } from "react-hot-toast"
 import Input from '../../components/Input'
 import Checkbox from '../../components/Checkbox'
 import Button from '../../components/Button'
 import SocialButton from '../../components/SocialButton'
 import Divider from '../../components/Divider'
+import toast from "react-hot-toast"
 import { GoogleIcon, FacebookIcon, GithubIcon } from '../../components/icons/Icons'
 import { Link, useNavigate } from 'react-router'
 import Layout from '../../components/LoginPage/Layout'
 import Card from '../../components/LoginPage/Card'
 import Header from '../../components/LoginPage/Header'
+import { useAuth } from '../../contexts/AuthContext'
 
 
 const Login = ({ onLogin }) => {
@@ -46,7 +49,7 @@ const Login = ({ onLogin }) => {
             });
             if (response.ok) {
                 const data = await response.json();
-                setToken(data.token)
+                setToken(data.access_token)
 
                 setTimeout(() => {
                     navigate('/perfil');
@@ -54,15 +57,34 @@ const Login = ({ onLogin }) => {
 
             } else {
                 const errorData = await response.json();
-                setError(errorData.message || 'falha')
+                setError(errorData.message || 'falha');
+                toast.error('Falha ao fazer login', {
+                    duration: 3000,
+                    position: 'top-center'
+                });
             }
         } catch (err) {
-            setError('error server')
+            setError('error server');
+            toast.error('Falha ao fazer login', {
+                duration: 3000,
+                position: 'top-center'
+            });
         }
     }
 
     return (
         <Layout>
+            <Toaster
+                position="top-center"
+                toastOptions={{
+                    style: {
+                        marginTop: '10px',
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    }
+                }}
+            />
             <Card>
                 <Header
                     title="Bem-vindo ao GroupGo"

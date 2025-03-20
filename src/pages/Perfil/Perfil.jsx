@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Perfil = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const { token } = useAuth();
 
     useEffect(() => {
         const fetchPerfil = async () => {
@@ -14,8 +15,8 @@ const Perfil = () => {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
-                    credentials: 'include'
                 });
 
                 if (response.ok) {
